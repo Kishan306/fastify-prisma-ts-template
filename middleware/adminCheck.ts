@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { FastifyRequest, FastifyReply } from "fastify"
 import type { JwtPayload } from "jsonwebtoken";
 
-export const adminCheck = (request: FastifyRequest, reply: FastifyReply) => {
+export const adminCheck = (request: FastifyRequest, reply: FastifyReply, done: ()=>void) => {
     const token = request.headers["authorization"]?.replace("Bearer ", "");
 
     if(!token){
@@ -18,4 +18,6 @@ export const adminCheck = (request: FastifyRequest, reply: FastifyReply) => {
     } catch (error) {
         console.log(error.name);
     }
+
+    done()
 }

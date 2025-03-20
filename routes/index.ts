@@ -23,6 +23,7 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     },
   });
   fastify.get("/api/allusers", {
+    preHandler: adminCheck,
     handler: getAllUsers
   });
 

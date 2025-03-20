@@ -12,7 +12,7 @@ const passwordSchema = Joi.string()
 export const validateSignup = async (
   req: FastifyRequest,
   reply: FastifyReply,
-  done
+  done: ()=>void
 ) => {
   const { username, email, password } = req.body as {
     username: string;
@@ -44,7 +44,7 @@ export const validateSignup = async (
 export const validateLogin = (
   req: FastifyRequest,
   reply: FastifyReply,
-  done
+  done: ()=>void
 ) => {
   const { email, password } = req.body as { email: string; password: string };
 
