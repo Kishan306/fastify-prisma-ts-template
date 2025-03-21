@@ -102,7 +102,7 @@ const getAllUsers = async (request: FastifyRequest, reply: FastifyReply)=> {
 
     return reply.status(200).send({ allUsers })
   } catch (error) {
-    return reply.status(400).send({error: error.message})
+    return reply.status(500).send({error: error.message})
   }
 }
 
