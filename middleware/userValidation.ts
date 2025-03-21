@@ -9,10 +9,10 @@ const passwordSchema = Joi.string()
   )
   .required();
 
-export const validateSignup = async (
+export const validateSignup = (
   req: FastifyRequest,
   reply: FastifyReply,
-  done: ()=>void
+  done: () => void
 ) => {
   const { username, email, password } = req.body as {
     username: string;
@@ -44,7 +44,7 @@ export const validateSignup = async (
 export const validateLogin = (
   req: FastifyRequest,
   reply: FastifyReply,
-  done: ()=>void
+  done: () => void
 ) => {
   const { email, password } = req.body as { email: string; password: string };
 
@@ -55,12 +55,10 @@ export const validateLogin = (
 
   const { error: passwordError } = passwordSchema.validate(password);
   if (passwordError) {
-    return reply
-      .status(400)
-      .send({
-        error:
-          "Password must contain at least one uppercase, one lowercase, one number, one special character and should be of length 8-20",
-      });
+    return reply.status(400).send({
+      error:
+        "Password must contain at least one uppercase, one lowercase, one number, one special character and should be of length 8-20",
+    });
   }
 
   done();

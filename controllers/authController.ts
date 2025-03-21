@@ -50,7 +50,6 @@ const signUp = async (request: FastifyRequest, reply: FastifyReply) => {
 };
 
 const login = async (request: FastifyRequest, reply: FastifyReply) => {
-  console.log("hi")
   const { email, password } = request.body as {
     email: string;
     password: string;
@@ -92,18 +91,18 @@ const login = async (request: FastifyRequest, reply: FastifyReply) => {
   }
 };
 
-const getAllUsers = async (request: FastifyRequest, reply: FastifyReply)=> {
+const getAllUsers = async (request: FastifyRequest, reply: FastifyReply) => {
   try {
     const allUsers = await prisma.user.findMany({});
 
-    if(!allUsers){
-      return reply.status(404).send({message: "No users found"})
+    if (!allUsers) {
+      return reply.status(404).send({ message: "No users found" });
     }
 
-    return reply.status(200).send({ allUsers })
+    return reply.status(200).send({ allUsers });
   } catch (error) {
-    return reply.status(500).send({error: error.message})
+    return reply.status(500).send({ error: error.message });
   }
-}
+};
 
 export { signUp, login, getAllUsers };
