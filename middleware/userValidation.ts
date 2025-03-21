@@ -31,11 +31,24 @@ export const validateSignup = (
   }
 
   const { error: passwordError } = passwordSchema.validate(password);
-  if (passwordError) {
-    return reply.status(400).send({
-      error:
-        "Password must contain at least one uppercase, one lowercase, one number, one special character and should be of length 8-20",
-    });
+  if(passwordError){
+    if(password.length < 8 || password.length > 20){
+      return reply.status(400).send({
+        error: "Password length must be between 8-20 characters!"
+      })
+    } else if ( password == password.toUpperCase() || password == password.toLowerCase()){
+      return reply.status(400).send({
+        error: "Password must have both uppercase and lowercase characters!"
+      })
+    } else if (!/[0-9]/.test(password)) {
+      return reply.status(400).send({
+        error: "Password must contain at least one digit!"
+      })
+    } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+      return reply.status(400).send({
+        error: "Password must contain at least one special character!"
+      })
+    }
   }
 
   done();
@@ -54,11 +67,24 @@ export const validateLogin = (
   }
 
   const { error: passwordError } = passwordSchema.validate(password);
-  if (passwordError) {
-    return reply.status(400).send({
-      error:
-        "Password must contain at least one uppercase, one lowercase, one number, one special character and should be of length 8-20",
-    });
+  if(passwordError){
+    if(password.length < 8 || password.length > 20){
+      return reply.status(400).send({
+        error: "Password length must be between 8-20 characters!"
+      })
+    } else if ( password == password.toUpperCase() || password == password.toLowerCase()){
+      return reply.status(400).send({
+        error: "Password must have both uppercase and lowercase characters!"
+      })
+    } else if (!/[0-9]/.test(password)) {
+      return reply.status(400).send({
+        error: "Password must contain at least one digit!"
+      })
+    } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+      return reply.status(400).send({
+        error: "Password must contain at least one special character!"
+      })
+    }
   }
 
   done();
